@@ -8,7 +8,9 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 public class XubinApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(XubinApplication.class, args);
+   System.out.println("启动成功");
     }
 
 }
