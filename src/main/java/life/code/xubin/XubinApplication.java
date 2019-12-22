@@ -1,10 +1,11 @@
 package life.code.xubin;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-
-@SpringBootApplication(exclude=DataSourceAutoConfiguration.class)
+@MapperScan(basePackages = "life.code.xubin.mapper")
+@SpringBootApplication
 public class XubinApplication {
 
     public static void main(String[] args) {
