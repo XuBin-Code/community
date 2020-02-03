@@ -1,5 +1,7 @@
 package life.code.xubin.controller;
 
+import com.github.pagehelper.PageInfo;
+import life.code.xubin.DTO.PaginationDTO;
 import life.code.xubin.DTO.QuestionDTO;
 import life.code.xubin.mapper.UserMapper;
 import life.code.xubin.model.User;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +24,12 @@ public class IndexController {
     @Autowired
     private QuestionService questionService;
     @GetMapping("/")
-    public String index(HttpServletRequest request,
-    Model model) {
+    public String index(@RequestParam(value="pageNum",defaultValue="1")int pageNum,
+                        @RequestParam(value="pageSize",defaultValue="1")int pageSize,
+                        Model model,HttpServletRequest request){
+
+
+
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
@@ -38,8 +45,10 @@ public class IndexController {
             }
 
         }
-        List<QuestionDTO> questionlist =questionService.list();
-        model.addAttribute("questions",questionlist);
+
+        PaginationDTO paginationDTO =questionService.list(pageNum,pageSize);
+
+        model.addAttribute("pagination",paginationDTO);
         return "index";
     }
 }
