@@ -80,16 +80,12 @@ public class PaginationDTO {
         this.totalPage = totalPage;
     }
 
-    public void setpagination(int totalCount, int pageNum, int pageSize) {
+    public void setpagination( int pageNum, int totalPage) {
 
 
 
 
-        if(totalCount%pageSize==0){
-            totalPage=totalCount/pageSize;
-        }else {
-            totalPage=totalCount/pageSize+1;
-        }
+        this.totalPage=totalPage;
         if(pageNum<1){
             pageNum=1;
         }

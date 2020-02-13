@@ -25,26 +25,11 @@ public class IndexController {
     private QuestionService questionService;
     @GetMapping("/")
     public String index(@RequestParam(value="pageNum",defaultValue="1")int pageNum,
-                        @RequestParam(value="pageSize",defaultValue="1")int pageSize,
+                        @RequestParam(value="pageSize",defaultValue="2")int pageSize,
                         Model model,HttpServletRequest request){
 
 
 
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("token")) {
-                    String token = cookie.getValue();
-                    User user = userMapper.findbytoken(token);
-                    if (user != null) {
-                        request.getSession().setAttribute("user", user);
-                    }
-                    break;
-                }
-
-            }
-
-        }
 
         PaginationDTO paginationDTO =questionService.list(pageNum,pageSize);
 
